@@ -4,7 +4,6 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 import os
 
-# Create your models here.
 class Standard(models.Model):
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(null=True, blank=True)
@@ -20,7 +19,7 @@ class Standard(models.Model):
 def save_subject_image(instance, filename):
     upload_to = 'Images/'
     ext = filename.split('.')[-1]
-    # get filename
+
     if instance.subject_id:
         filename = 'Subject_Pictures/{}.{}'.format(instance.subject_id, ext)
     return os.path.join(upload_to, filename)
@@ -44,7 +43,7 @@ class Subject(models.Model):
 def save_lesson_files(instance, filename):
     upload_to = 'Images/'
     ext = filename.split('.')[-1]
-    # get filename
+   
     if instance.lesson_id:
         filename = 'lesson_files/{}/{}.{}'.format(instance.lesson_id,instance.lesson_id, ext)
         if os.path.exists(filename):
@@ -104,7 +103,7 @@ class SlotSubject(models.Model):
 class Comment(models.Model):
     lesson_name = models.ForeignKey(Lesson,null=True, on_delete=models.CASCADE,related_name='comments')
     comm_name = models.CharField(max_length=100, blank=True)
-    # reply = models.ForeignKey("Comment", null=True, blank=True, on_delete=models.CASCADE,related_name='replies')
+   
     author = models.ForeignKey(User,on_delete=models.CASCADE)
     body = models.TextField(max_length=500)
     date_added = models.DateTimeField(auto_now_add=True)

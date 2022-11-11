@@ -9,7 +9,7 @@
 
   </head>
   <body>
-    <!-- navigation bar -->
+ 
               <nav class="navbar navbar-expand-lg  navbar-light bg-light fixed-top scrolling-navbar">
                 <div class="container" >
                       <a class="navbar-brand" href="{% url 'index' %}" style="color:#ff5722;" >Home</a>
@@ -42,13 +42,6 @@
                                 <li class="nav-item">
                                    <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
                                 </li>
-                                <li class="nav-item">
-                                   <a class="nav-link" href="https://github.com/somvirs57/school_learning_management">GitHub</a>
-                                </li>
-                                <li class="nav-item">
-                                   <a class="nav-link" href="https://www.youtube.com/c/LearningBots">Youtube</a>
-                                </li>
-
                         </ul>
                       </div>
                 </div>
@@ -67,7 +60,12 @@
         <div class="row mt-4">
                   <div class="col-md-4 mt-4">
                             <h3>About Us</h3> <br>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <p>Team TLE <br>Team Members: <br >
+                              <li>Purvi Rawat</li>
+                              <li>Astha Negi</li>
+                              <li>Rajat Joshi</li>
+                              <li>Nishant Bisht</li>
+                            </ol></p>
                   </div>
                   <div class="col-md-4 mt-4">
                             <h3>Other Useful Stuff</h3>
@@ -96,5 +94,53 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+    <script>
+      var words = ['Start Learning','the exclusive content'],
+    part,
+    i = 0,
+    offset = 0,
+    len = words.length,
+    forwards = true,
+    skip_count = 0,
+    skip_delay = 15,
+    speed = 70;
+var wordflick = function () {
+  setInterval(function () {
+    if (forwards) {
+      if (offset >= words[i].length) {
+        ++skip_count;
+        if (skip_count == skip_delay) {
+          forwards = false;
+          skip_count = 0;
+        }
+      }
+    }
+    else {
+      if (offset == 0) {
+        forwards = true;
+        i++;
+        offset = 0;
+        if (i >= len) {
+          i = 0;
+        }
+      }
+    }
+    part = words[i].substr(0, offset);
+    if (skip_count == 0) {
+      if (forwards) {
+        offset++;
+      }
+      else {
+        offset--;
+      }
+    }
+    $('.display-4').text(part);
+  },speed);
+};
+
+$(document).ready(function () {
+  wordflick();
+});
+    </script>
   </body>
 </html>

@@ -10,9 +10,7 @@ class UserForm(UserCreationForm):
         model = User
         fields = ('username','first_name','last_name', 'email', 'password1', 'password2')
 
-        # widgets = {
-        # "password":"forms.PasswordInput()",
-        # }
+       
 
         labels = {
         'password1':'Password',

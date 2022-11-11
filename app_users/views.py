@@ -8,7 +8,7 @@ from django.views.generic import TemplateView
 from curriculum.models import Standard
 from .models import UserProfileInfo, Contact
 from django.views.generic import CreateView
-
+from datetime import datetime
 def user_login(request):
     if request.method == "POST":
         username = request.POST.get('username')
@@ -24,7 +24,7 @@ def user_login(request):
                 return HttpResponse("ACCOUNT IS DEACTIVATED")
         else:
             return HttpResponse("Please use correct id and password")
-            # return HttpResponseRedirect(reverse('register'))
+      
 
     else:
         return render(request, 'app_users/login.html')
@@ -36,9 +36,7 @@ def user_logout(request):
     return HttpResponseRedirect(reverse('index'))
 
 
-# Create your views here.
-# def index(request):
-#     return render(request,'app_users/index.html')
+
 
 def register(request):
 
@@ -50,7 +48,7 @@ def register(request):
 
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
-            # user.set_password(user.password)
+
             user.save()
 
             profile = profile_form.save(commit=False)
@@ -84,3 +82,12 @@ class ContactView(CreateView):
     model = Contact
     fields = '__all__'
     template_name = 'app_users/contact.html'
+
+def contact(request):
+    if request.method == "POST": 
+        name=request.POST.get('name')
+        email=request.POST.get('email')
+        query=request.POST.get('query')
+        contact = Contact(name=name,email=email,query=query,date=datetime.today())
+        contact.save()
+    return render(request,"contact.html")
